@@ -66,9 +66,19 @@ def load_model():
     clf.fit(X, df["label"].astype(str))
     def fetch_article_from_url(url: str):
   try:
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    def fetch_article_from_url(url: str):
+    try:
+        headers = {"User-Agent": "Mozilla/5.0"}
+        res = requests.get(url, headers=headers, timeout=10)
+        res.raise_for_status()
+        soup = BeautifulSoup(res.text, "html.parser")
+        title = soup.title.get_text(strip=True) if soup.title else "Untitled"
+        paragraphs = [p.get_text(" ", strip=True) for p in soup.find_all("p") if len(p.get_text(strip=True)) > 40]
+        text = f"{title}\n\n" + "\n".join(paragraphs)
+        return text.strip(), title, None
+    except Exception as e:
+        return None, None, str(e)
+        
         )
     }
     res = requests.get(url, headers=headers, timeout=10)
