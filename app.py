@@ -249,13 +249,13 @@ elif page == "Analyze News":
     
     tab_text, tab_url = st.tabs(["📝 Paste News Text", "🔗 Fetch from News URL"])
 
-with tab_url:
+    with tab_url:
   news_url = st.text_input(
       "Enter any news article URL:",
       placeholder="https://example.com/news-story",
   )
-  if st.button("Extract Article from URL"):
-    if news_url.strip():
+            if st.button("Extract Article from URL"):
+                if news_url.strip():
       with st.spinner("Fetching article content..."):
         fetched_text, fetched_title, err = fetch_article_from_url(
             news_url.strip()
@@ -268,7 +268,7 @@ with tab_url:
     else:
       st.warning("Please paste a valid URL first.")
 
-with tab_text:
+    with tab_text:
   article = st.text_area(
       "News headline or full article text:",
       value=st.session_state.get("fetched_article", ""),
