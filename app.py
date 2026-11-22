@@ -65,7 +65,6 @@ def load_model():
     clf = LogisticRegression(max_iter=1000, class_weight="balanced")
     clf.fit(X, df["label"].astype(str))
     def fetch_article_from_url(url: str):
-    try:
         headers = {"User-Agent": "Mozilla/5.0"}
         res = requests.get(url, headers=headers, timeout=10)
         res.raise_for_status()
