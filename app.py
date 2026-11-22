@@ -283,7 +283,7 @@ with tab_text:
       height=180,
       placeholder="Paste news text here, or extract it from the URL tab...",
   )
-    if st.button("⚡ Run hybrid analysis", use_container_width=True):
+if st.button("⚡ Run hybrid analysis", use_container_width=True):
         if len(article.strip()) < 30:
             st.error("Please enter at least 30 characters for a meaningful analysis.")
         else:
