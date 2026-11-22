@@ -246,7 +246,7 @@ elif page == "Analyze News":
     st.markdown('<div class="smallcaps">CREDIBILITY WORKSPACE / 02</div>', unsafe_allow_html=True)
     st.title("Analyze a news report")
     st.markdown('<p class="muted">Paste the article text. Avoid including personal or confidential information.</p>', unsafe_allow_html=True)
-   tab_text, tab_url = st.tabs(["📝 Paste News Text", "🔗 Fetch from News URL"])
+    tab_text, tab_url = st.tabs(["📝 Paste News Text", "🔗 Fetch from News URL"])
         with tab_url:
         news_url = st.text_input("Enter any news article URL:", placeholder="https://example.com/news-story")
         if st.button("Extract Article from URL"):
