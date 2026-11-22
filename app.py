@@ -76,8 +76,6 @@ def load_model():
         return text.strip(), title, None
     except Exception as e:
         return None, None, str(e)
-        
-        )
     }
     res = requests.get(url, headers=headers, timeout=10)
     res.raise_for_status()
