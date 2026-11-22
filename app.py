@@ -96,7 +96,6 @@ def load_model():
   except Exception as e:
     return None, None, str(e)
     return {"vectorizer": vectorizer, "classifier": clf}, True
-
 @st.cache_resource
 def cached_model():
     return load_model()
