@@ -247,35 +247,27 @@ elif page == "Analyze News":
     st.title("Analyze a news report")
     st.markdown('<p class="muted">Paste the article text. Avoid including personal or confidential information.</p>', unsafe_allow_html=True)
     
-    tab_text, tab_url = st.tabs(["📝 Paste News Text", "🔗 Fetch from News URL"])
+        tab_text, tab_url = st.tabs(["📝 Paste News Text", "🔗 Fetch from News URL"])
 
     with tab_url:
-  news_url = st.text_input(
-      "Enter any news article URL:",
-      placeholder="https://example.com/news-story",
-  )
-            if st.button("Extract Article from URL"):
-                if news_url.strip():
-      with st.spinner("Fetching article content..."):
-        fetched_text, fetched_title, err = fetch_article_from_url(
-            news_url.strip()
-        )
-        if fetched_text and len(fetched_text) > 30:
-          st.session_state["fetched_article"] = fetched_text
-          st.success(f"Extracted: **{fetched_title}**")
-        else:
-          st.error(f"Could not extract text: {err or 'Blocked or empty page'}")
-    else:
-      st.warning("Please paste a valid URL first.")
+        news_url = st.text_input("Enter any news article URL:", placeholder="https://example.com/news-story")
+        if st.button("Extract Article from URL"):
+            if news_url.strip():
+                with st.spinner("Fetching article content..."):
+                    fetched_text, fetched_title, err = fetch_article_from_url(news_url.strip())
+                    if fetched_text and len(fetched_text) > 30:
+                        st.session_state["fetched_article"] = fetched_text
+                        st.success(f"Extracted: **{fetched_title}**")
+                    else:
+                        st.error(f"Could not extract text: {err or 'Blocked or empty page'}")
+            else:
+                st.warning("Please paste a valid URL first.")
 
     with tab_text:
-  article = st.text_area(
-      "News headline or full article text:",
-      value=st.session_state.get("fetched_article", ""),
-      height=180,
-      placeholder="Paste news text here, or extract it from the URL tab...",
-  )
-if st.button("⚡ Run hybrid analysis", use_container_width=True):
+        article = st.text_area("News headline or full article text:", value=st.session_state.get("fetched_article", ""), height=180, placeholder="Paste news text here, or extract it from the URL tab...")
+
+    if st.button("⚡ Run hybrid analysis", use_container_width=True):
+        
         if len(article.strip()) < 30:
             st.error("Please enter at least 30 characters for a meaningful analysis.")
         else:
