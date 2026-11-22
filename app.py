@@ -8,7 +8,7 @@ import joblib
 from dotenv import load_dotenv
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from bs4 import Beautifulsoup
+from bs4 import BeautifulSoup
 import requests
 
 try:
