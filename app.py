@@ -113,7 +113,7 @@ Text:
 {text[:9000]}
 """
         response = client.models.generate_content(
-            model=get_secret("GEMINI_MODEL", "gemini-2.5-flash"),
+            model=get_secret("GEMINI_MODEL", "gemini-3.8-flash"),
             contents=prompt
         )
         raw = response.text or ""
