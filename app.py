@@ -56,9 +56,7 @@ def get_secret(name, default=""):
         return os.getenv(name, default)
 
 def load_model():
-        if  MODEL_PATH.exists():
-            def load_model():
-        if  MODEL_PATH.exists():
+    if MODEL_PATH.exists():
         return joblib.load(MODEL_PATH), False
     # The included tiny sample set is only a smoke-test/demo dataset, not a research-grade model.
     df = pd.read_csv(DATA_PATH)
@@ -66,7 +64,9 @@ def load_model():
     X = vectorizer.fit_transform(df["text"].astype(str))
     clf = LogisticRegression(max_iter=1000, class_weight="balanced")
     clf.fit(X, df["label"].astype(str))
-    return {"vectorizer": vectorizer, "model": clf}, True
+    return {"vectorizer": vectorizer, "classifier": clf}, True
+
+
 def fetch_article_from_url(url: str):
     try:
         headers = {"User-Agent": "Mozilla/5.0"}
@@ -79,6 +79,7 @@ def fetch_article_from_url(url: str):
         return text.strip(), title, None
     except Exception as e:
         return None, None, str(e)
+        
 @st.cache_resource
 def cached_model():
     return load_model()
