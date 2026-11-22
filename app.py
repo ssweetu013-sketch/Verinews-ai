@@ -293,7 +293,7 @@ if st.button("⚡ Run hybrid analysis", use_container_width=True):
                 final_label, decision_note = final_decision(ml_label, llm_data)
                 saved = save_record(article, ml_label, ml_probs, llm_data, final_label)
             st.session_state["latest"] 
-                "ml_label": ml_label, "ml_probs": ml_probs, "llm": llm_data,
+    "ml_label": ml_label, "ml_probs": ml_probs, "llm": llm_data,
                 "llm_error": llm_error, "final": final_label, "note": decision_note,
                 "demo": demo_mode, "saved": saved
                result = st.session_state.get("latest")
