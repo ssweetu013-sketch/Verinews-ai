@@ -57,7 +57,7 @@ def get_secret(name, default=""):
 
 def load_model():
         if  MODEL_PATH.exists():
-        def load_model():
+            def load_model():
         if  MODEL_PATH.exists():
         return joblib.load(MODEL_PATH), False
     # The included tiny sample set is only a smoke-test/demo dataset, not a research-grade model.
