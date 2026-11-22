@@ -56,9 +56,9 @@ def get_secret(name, default=""):
         return os.getenv(name, default)
 
 def load_model():
-    if  MODEL_PATH.exists():
+        if  MODEL_PATH.exists():
         def load_model():
-    if  MODEL_PATH.exists():
+        if  MODEL_PATH.exists():
         return joblib.load(MODEL_PATH), False
     # The included tiny sample set is only a smoke-test/demo dataset, not a research-grade model.
     df = pd.read_csv(DATA_PATH)
