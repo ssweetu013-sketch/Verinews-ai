@@ -296,7 +296,7 @@ if st.button("⚡ Run hybrid analysis", use_container_width=True):
                 "ml_label": ml_label, "ml_probs": ml_probs, "llm": llm_data,
                 "llm_error": llm_error, "final": final_label, "note": decision_note,
                 "demo": demo_mode, "saved": saved
-            }   result = st.session_state.get("latest")
+               result = st.session_state.get("latest")
 if result:
         st.divider()
         st.markdown("### Analysis result")
