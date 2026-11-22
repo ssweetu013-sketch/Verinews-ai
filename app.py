@@ -73,7 +73,7 @@ def load_model():
         paragraphs = [p.get_text(" ", strip=True) for p in soup.find_all("p") if len(p.get_text(strip=True)) > 40]
         text = f"{title}\n\n" + "\n".join(paragraphs)
         return text.strip(), title, None
-    except Exception as e:
+    except Exception as :
         return None, None, str(e)
     res = requests.get(url, headers=headers, timeout=10)
     res.raise_for_status()
