@@ -3,6 +3,7 @@ scikit-learn
 pandas
 numpy
 joblib
+python-dotenv
 beautifulsoup4
 requests
 google-genai
