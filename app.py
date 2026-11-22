@@ -57,37 +57,28 @@ def get_secret(name, default=""):
 
 def load_model():
     if MODEL_PATH.exists():
+        def load_model():
+    if MODEL_PATH.exists():
         return joblib.load(MODEL_PATH), False
     # The included tiny sample set is only a smoke-test/demo dataset, not a research-grade model.
     df = pd.read_csv(DATA_PATH)
-    vectorizer = TfidfVectorizer(stop_words="english", ngram_range=(1,2), max_features=12000)
+    vectorizer = TfidfVectorizer(stop_words="english", ngram_range=(1, 2), max_features=12000)
     X = vectorizer.fit_transform(df["text"].astype(str))
     clf = LogisticRegression(max_iter=1000, class_weight="balanced")
     clf.fit(X, df["label"].astype(str))
-    def fetch_article_from_url(url: str):
+    return {"vectorizer": vectorizer, "model": clf}, True
+def fetch_article_from_url(url: str):
+    try:
         headers = {"User-Agent": "Mozilla/5.0"}
         res = requests.get(url, headers=headers, timeout=10)
         res.raise_for_status()
         soup = BeautifulSoup(res.text, "html.parser")
         title = soup.title.get_text(strip=True) if soup.title else "Untitled"
-        paragraphs = [p.get_text(" ", strip=True) for p in soup.find_all("p") if len(p.get_text(strip=True)) > 40]
+        paragraphs = [p.get_text(" ", strip=True) for p in soup.find_all("p") if len(p.get_text(strip=True)) > 20]
         text = f"{title}\n\n" + "\n".join(paragraphs)
         return text.strip(), title, None
+    except Exception as e:
         return None, None, str(e)
-    res = requests.get(url, headers=headers, timeout=10)
-    res.raise_for_status()
-    soup = BeautifulSoup(res.text, "html.parser")
-
-    title = soup.title.get_text(strip=True) if soup.title else "Untitled"
-    paragraphs = [
-        p.get_text(" ", strip=True)
-        for p in soup.find_all("p")
-        if len(p.get_text(strip=True)) > 40
-    ]
-    article_text = f"{title}\n\n" + "\n".join(paragraphs)
-    return article_text.strip(), title, None
-    return None, None, str(e)
-    return {"vectorizer": vectorizer, "classifier": clf}, True
 @st.cache_resource
 def cached_model():
     return load_model()
