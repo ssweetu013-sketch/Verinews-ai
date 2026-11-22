@@ -86,7 +86,6 @@ def load_model():
     ]
     article_text = f"{title}\n\n" + "\n".join(paragraphs)
     return article_text.strip(), title, None
-  except Exception as e:
     return None, None, str(e)
     return {"vectorizer": vectorizer, "classifier": clf}, True
 @st.cache_resource
